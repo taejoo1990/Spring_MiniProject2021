@@ -1,5 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var='root' value="${pageContext.request.contextPath }/"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,45 +16,7 @@
 </head>
 <body>
 	
-<!-- 상단 메뉴 부분 -->
-<nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-top shadow-lg">
-	<a class="navbar-brand" href="index.html">SoftSoldesk</a>
-	<button class="navbar-toggler" type="button" data-toggle="collapse"
-	        data-target="#navMenu">
-		<span class="navbar-toggler-icon"></span>        
-	</button>
-	<div class="collapse navbar-collapse" id="navMenu">
-		<ul class="navbar-nav">
-			<li class="nav-item">
-				<a href="board_main.html" class="nav-link">자유게시판</a>
-			</li>
-			<li class="nav-item">
-				<a href="board_main.html" class="nav-link">유머게시판</a>
-			</li>
-			<li class="nav-item">
-				<a href="board_main.html" class="nav-link">정치게시판</a>
-			</li>
-			<li class="nav-item">
-				<a href="board_main.html" class="nav-link">스포츠게시판</a>
-			</li>
-		</ul>
-		
-		<ul class="navbar-nav ml-auto">
-			<li class="nav-item">
-				<a href="login.html" class="nav-link">로그인</a>
-			</li>
-			<li class="nav-item">
-				<a href="join.html" class="nav-link">회원가입</a>
-			</li>
-			<li class="nav-item">
-				<a href="modify_user.html" class="nav-link">정보수정</a>
-			</li>
-			<li class="nav-item">
-				<a href="index.html" class="nav-link">로그아웃</a>
-			</li>
-		</ul>
-	</div>
-</nav>
+<c:import url="/WEB-INF/views/include/top_menu.jsp"/>
 
 <!-- 게시판 미리보기 부분 -->
 <div class="container" style="margin-top:100px">
@@ -72,33 +36,33 @@
 						<tbody>
 							<tr>
 								<td class="text-center">5</td>
-								<th><a href='board_read.html'>제목입니다</a></th>
-								<td class="text-center d-none d-xl-table-cell">2018-12-12</td>
+								<th><a href='${root }board/read'>제목입니다</a></th>
+								<td class="text-center d-none d-xl-table-cell">2021-04-09</td>
 							</tr>
 							<tr>
 								<td class="text-center">5</td>
-								<th><a href='board_read.html'>제목입니다</a></th>
-								<td class="text-center d-none d-xl-table-cell">2018-12-12</td>
+								<th><a href='${root }board/read'>제목입니다</a></th>
+								<td class="text-center d-none d-xl-table-cell">2021-04-09</td>
 							</tr>
 							<tr>
 								<td class="text-center">5</td>
-								<th><a href='board_read.html'>제목입니다</a></th>
-								<td class="text-center d-none d-xl-table-cell">2018-12-12</td>
+								<th><a href='${root }board/read'>제목입니다</a></th>
+								<td class="text-center d-none d-xl-table-cell">2021-04-09</td>
 							</tr>
 							<tr>
 								<td class="text-center">5</td>
-								<th><a href='board_read.html'>제목입니다</a></th>
-								<td class="text-center d-none d-xl-table-cell">2018-12-12</td>
+								<th><a href='${root }board/read'>제목입니다</a></th>
+								<td class="text-center d-none d-xl-table-cell">2021-04-09</td>
 							</tr>
 							<tr>
 								<td class="text-center">5</td>
-								<th><a href='board_read.html'>제목입니다</a></th>
-								<td class="text-center d-none d-xl-table-cell">2018-12-12</td>
+								<th><a href='${root }board/read'>제목입니다</a></th>
+								<td class="text-center d-none d-xl-table-cell">2021-04-09</td>
 							</tr>
 						</tbody>
 					</table>
 					
-					<a href="board_main.html" class="btn btn-primary">더보기</a>
+					<a href="${root }board/main" class="btn btn-primary">더보기</a>
 				</div>
 			</div>
 		</div>
@@ -241,14 +205,7 @@
 	</div>
 </div>
 	
-<div class="container-fluid bg-dark text-white" style="margin-top:50px;padding-top:30px;padding-bottom:30px">
-	<div class="container">
-		<p>http://www.softSoldesk.co.kr</p>
-		<p>게시판 예제</p>
-		<p>사업자번호 : 000-111-222</p>
-	</div>
-</div>
-
+<c:import url="/WEB-INF/views/include/bottom_info.jsp"/>
 </body>
 </html>
 
@@ -260,3 +217,12 @@
 
 
 
+
+
+
+
+
+
+
+
+    

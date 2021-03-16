@@ -5,10 +5,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class MainController {
-
+	
 	@GetMapping("/main")
-	public String Main() {
-		String viewName="Main";
-		return viewName;
+	public String main() {
+		return "main"; //jsp
 	}
+	
+
 }
