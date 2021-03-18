@@ -1,33 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans:beans xmlns="http://www.springframework.org/schema/mvc"
-			 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-			 xmlns:beans="http://www.springframework.org/schema/beans"
-			 xmlns:context="http://www.springframework.org/schema/context"
-			 xsi:schemaLocation="http://www.springframework.org/schema/mvc
-			 					 http://www.springframework.org/schema/mvc/spring-mvc.xsd
-			 					 http://www.springframework.org/schema/beans
-			 					 http://www.springframework.org/schema/beans/spring-beans.xsd
-			 					 http://www.springframework.org/schema/context
-			 					 http://www.springframework.org/schema/context/spring-context.xsd">
-			 					 
+
+<beans:beans
+	xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc
+       				http://www.springframework.org/schema/mvc/spring-mvc.xsd
+       				http://www.springframework.org/schema/beans
+       				http://www.springframework.org/schema/beans/spring-beans.xsd
+       				http://www.springframework.org/schema/context
+       				http://www.springframework.org/schema/context/spring-context.xsd">
+	<!-- 어노테이션을 가지고 있는 controller를 로딩한다 -->
+	<annotation-driven />
 	
-			 					 
-	<!-- 스캔한 패지키 내부의 클래스 중 Controller 어노테이션을 가지고 있는 클래스들을 Controller로 로딩하도록 한다 -->
-	<annotation-driven/>
-	
-	<!-- 스캔할 bean들이 모여있는 패키지를 지정한다. -->
-	<context:component-scan base-package="kr.co.softsoldesk.controller"/>
-    <context:component-scan base-package="kr.co.softsoldesk.dao"/>
-    <context:component-scan base-package="kr.co.softsoldesk.service"/>
-    
-    <!-- Controller의 메서드에서 반환하는 문자열 앞 뒤에 붙힐 경로 정보를 셋팅한다. -->
-	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<beans:property name="prefix" value="/WEB-INF/views/"/>
-		<beans:property name="suffix" value=".jsp"/>
+	<!-- 스캔할 bean들이 모여있는 패키지를 지정한다 -->
+	<context:component-scan	base-package="kr.co.softsoldesk.Controller" />
+	<context:component-scan	base-package="kr.co.softsoldesk.DAO" />
+	<context:component-scan	base-package="kr.co.softsoldesk.service" />
+
+	<!-- controller메서드(home())에서 반환하는 문자열 앞(경로),뒤에(확장자) 붙을 경로 -->
+	<beans:bean	class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<beans:property name="prefix" value="/WEB-INF/views/" />
+		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
-	
-	<!-- 정적파일(이미지, 사운드, 동영상, JS, CSS 등등) 경로 셋팅 -->
-	<resources mapping="/**" location="/resources/"/>
+
+	<!-- 정적데이터(이미지,사운드,동영상,js,css) 경로 설정 -->
+	<resources location="/resources/" mapping="/**"/>
+
 	
 	<!-- properties 파일의 내용을 사용할수 있도록 Bean을 정의한다. -->
 	<beans:bean class='org.springframework.beans.factory.config.PropertyPlaceholderConfigurer'>
@@ -35,7 +35,7 @@
 			<beans:value>/WEB-INF/properties/db.properties</beans:value>
 		</beans:property>
 	</beans:bean>
-	
+
 	<!-- 드라이버 설정 -->
 	<beans:bean class='org.apache.commons.dbcp2.BasicDataSource' id='basic_data_source'>
 		<beans:property name="driverClassName" value="${db.classname}"/>
@@ -54,7 +54,7 @@
 	<beans:bean class='org.mybatis.spring.SqlSessionTemplate' id='sqlSessionTemplate'>
 		<beans:constructor-arg index='0' ref='sqlSession'/>
 	</beans:bean>
-
+	
 	<!-- Intercepter등록 -->
 	<interceptors>
 		<interceptor>
@@ -63,9 +63,18 @@
 		</interceptor>
 	</interceptors>
 	
+	<!-- MessageSource를 등록한다 -->
+	<beans:bean class='org.springframework.context.support.ReloadableResourceBundleMessageSource' id='messageSource'>
+		<beans:property name="basenames">
+			<beans:list>
+				<beans:value>/WEB-INF/properties/error_message</beans:value>
+			</beans:list>
+		</beans:property>
+	</beans:bean>
 	
+	<!-- Message 접근을 위한 접근자 등록 -->
+	<beans:bean class='org.springframework.context.support.MessageSourceAccessor'>
+		<beans:constructor-arg ref='messageSource'/>
+	</beans:bean>
 	
-	
-	
-
 </beans:beans>

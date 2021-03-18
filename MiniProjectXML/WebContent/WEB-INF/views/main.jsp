@@ -1,7 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:set var='root' value="${pageContext.request.contextPath }/"/>
+<c:set var="root" value="${pageContext.request.contextPath }/"/>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,7 +15,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 </head>
 <body>
-	
+<!-- 탑메뉴 불러오기 -->
 <c:import url="/WEB-INF/views/include/top_menu.jsp"/>
 
 <!-- 게시판 미리보기 부분 -->
@@ -37,27 +37,27 @@
 							<tr>
 								<td class="text-center">5</td>
 								<th><a href='${root }board/read'>제목입니다</a></th>
-								<td class="text-center d-none d-xl-table-cell">2021-04-09</td>
+								<td class="text-center d-none d-xl-table-cell">2018-12-12</td>
 							</tr>
 							<tr>
 								<td class="text-center">5</td>
 								<th><a href='${root }board/read'>제목입니다</a></th>
-								<td class="text-center d-none d-xl-table-cell">2021-04-09</td>
+								<td class="text-center d-none d-xl-table-cell">2018-12-12</td>
 							</tr>
 							<tr>
 								<td class="text-center">5</td>
 								<th><a href='${root }board/read'>제목입니다</a></th>
-								<td class="text-center d-none d-xl-table-cell">2021-04-09</td>
+								<td class="text-center d-none d-xl-table-cell">2018-12-12</td>
 							</tr>
 							<tr>
 								<td class="text-center">5</td>
 								<th><a href='${root }board/read'>제목입니다</a></th>
-								<td class="text-center d-none d-xl-table-cell">2021-04-09</td>
+								<td class="text-center d-none d-xl-table-cell">2018-12-12</td>
 							</tr>
 							<tr>
 								<td class="text-center">5</td>
 								<th><a href='${root }board/read'>제목입니다</a></th>
-								<td class="text-center d-none d-xl-table-cell">2021-04-09</td>
+								<td class="text-center d-none d-xl-table-cell">2018-12-12</td>
 							</tr>
 						</tbody>
 					</table>
@@ -204,8 +204,9 @@
 		</div>
 	</div>
 </div>
-	
+<!-- 탑메뉴 불러오기 -->
 <c:import url="/WEB-INF/views/include/bottom_info.jsp"/>
+
 </body>
 </html>
 
@@ -217,12 +218,3 @@
 
 
 
-
-
-
-
-
-
-
-
-    

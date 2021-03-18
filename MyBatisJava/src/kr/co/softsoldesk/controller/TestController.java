@@ -25,6 +25,7 @@ public class TestController {
 	
 	@PostMapping("/input_pro")
 	public String input_pro(DataBean dataBean) {
+
 		mapper1.insert_data(dataBean);
 		return "input_pro";
 	}

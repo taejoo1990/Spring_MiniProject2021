@@ -11,6 +11,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
+import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -21,6 +23,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import kr.co.softsoldesk.interceptor.TopMenuInterceptor;
 import kr.co.softsoldesk.mapper.BoardMapper;
 import kr.co.softsoldesk.mapper.TopMenuMapper;
+import kr.co.softsoldesk.mapper.UserMapper;
 import kr.co.softsoldesk.service.TopMenuService;
 
 
@@ -80,7 +83,7 @@ public class ServletAppContext implements WebMvcConfigurer{
 		return factory;
 	}	
 
-	
+	//======================mapper==============================
 	// 쿼리문 실행을 위한 객체 (Mapper를 등록,관리)
 	@Bean
 	public MapperFactoryBean<BoardMapper> test_mapper(SqlSessionFactory factory) throws Exception{
@@ -94,7 +97,29 @@ public class ServletAppContext implements WebMvcConfigurer{
 		factoryBean.setSqlSessionFactory(factory);
 		return factoryBean;
 	}
+	@Bean
+	public MapperFactoryBean<UserMapper> getUserMenuMapper(SqlSessionFactory factory) throws Exception{
+		MapperFactoryBean<UserMapper> factoryBean = new MapperFactoryBean<UserMapper>(UserMapper.class);
+		factoryBean.setSqlSessionFactory(factory);
+		return factoryBean;
+	}
+	
+	//=======================errormessage==============================
+	//기본 에러메세지와, properties에 등록한 커스텀에러메세지의 충돌을 별도로 관리해야 함
+	@Bean
+	public static PropertySourcesPlaceholderConfigurer PropertySourcesPlaceholderConfigurer() {
+		return new PropertySourcesPlaceholderConfigurer();
+	}
 
+	
+	@Bean
+	public ReloadableResourceBundleMessageSource messageSource(){
+		ReloadableResourceBundleMessageSource res = new ReloadableResourceBundleMessageSource();
+		res.setBasenames("WEB-INF/properties/error_message");
+		return res;
+	}
+
+	
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		WebMvcConfigurer.super.addInterceptors(registry);
@@ -103,7 +128,6 @@ public class ServletAppContext implements WebMvcConfigurer{
 		InterceptorRegistration reg1= registry.addInterceptor(topMenuintercepter);
 		reg1.addPathPatterns("/**");
 	}
-
 
 
 
