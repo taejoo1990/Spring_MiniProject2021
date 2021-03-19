@@ -15,4 +15,8 @@ public class UserDAO {
 	public String checkUserIDExist(String user_id) {
 		return userMapper.checkUserIdExist(user_id);
 	}
+	
+	public void addUserInfo(UserBean JoinUserBean) {
+		userMapper.addUserInfo(JoinUserBean);
+	}
 }

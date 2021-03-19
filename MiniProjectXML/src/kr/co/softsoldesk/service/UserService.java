@@ -2,6 +2,7 @@ package kr.co.softsoldesk.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import kr.co.softsoldesk.beans.UserBean;
 import kr.co.softsoldesk.dao.UserDao;
 
 public class UserService {
@@ -17,5 +18,8 @@ public class UserService {
 	}
 	return false; //사용불가능
 }
-	
+
+	public void addUserInfo(UserBean JoinUserBean) {
+		userDAO.addUserInfo(JoinUserBean);
+	}
 }
