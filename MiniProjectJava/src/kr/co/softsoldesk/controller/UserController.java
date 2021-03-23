@@ -1,16 +1,20 @@
 package kr.co.softsoldesk.controller;
 
+import javax.annotation.Resource;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.co.softsoldesk.beans.UserBean;
 import kr.co.softsoldesk.service.UserService;
@@ -24,9 +28,36 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
+	@Resource(name = "LoginBean")
+	private UserBean loginUserBean;
+	
 	@GetMapping("/login")
-	public String login() {
+	public String login(@ModelAttribute("TempLoginBean") UserBean tempLoginBean,
+			@RequestParam(value = "fail" , defaultValue="false") boolean fail, Model model) {
+		
+		//fail값에 true가 들어오면 실패. 
+		//기본값 fail값에 false가 들어있으면 성공.
+		model.addAttribute("fail", fail);
+		
+		
+		
+		
 		return "user/login";	
+	}
+	@PostMapping("/login_pro")
+	public String login_pro(@Validated @ModelAttribute("TempLoginBean") UserBean tempLoginBean, BindingResult res) {
+		String fail="user/login_fail";
+		String success="user/login_success";
+		String reWrite="user/login";
+		userService.getLoginUserInfo(tempLoginBean); //true or false
+		if(res.hasErrors()) {
+			return reWrite; 
+			}
+		
+		if(loginUserBean.isUser_login()==true) {
+			return success;
+		}
+		return fail;
 	}
 	
 	@GetMapping("/join" )
@@ -44,6 +75,10 @@ public class UserController {
 		userService.addUserInfo(JoinUserbean);
 		return viewName;
 	}
+	
+	
+	
+
 
 	@GetMapping("/modify")
 	public String modify() {
@@ -61,6 +96,8 @@ public class UserController {
 		UserValidator validator1 = new UserValidator();
 		binder.addValidators(validator1);
 	}
+	
+	
 
 	
 	

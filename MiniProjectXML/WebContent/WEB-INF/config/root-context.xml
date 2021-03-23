@@ -5,5 +5,7 @@
 	   xsi:schemaLocation="http://www.springframework.org/schema/beans
 	   				http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+	<bean id="LoginUserBean" class="kr.co.softsoldesk.beans.UserBean" scope="session"/>
+
 
 </beans>

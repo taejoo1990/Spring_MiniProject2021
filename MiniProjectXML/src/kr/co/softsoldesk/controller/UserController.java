@@ -5,6 +5,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,8 +23,17 @@ public class UserController {
 	private UserService userService;
 	
 	@GetMapping("/login")
-	public String login() {
+	public String login(@ModelAttribute("TempLoginBean") UserBean tempLoginBean) {
+		
 		return "user/login";	
+	}
+	@PostMapping("/login_pro")
+	public String login_pro(@Validated @ModelAttribute("TempLoginBean") UserBean tempLoginBean, BindingResult res) {
+		String viewName="user/login_fail";
+		String reWrite="user/login";
+		if(res.hasErrors()) {
+			return reWrite; 
+			}return viewName;
 	}
 	
 	@GetMapping("/join")

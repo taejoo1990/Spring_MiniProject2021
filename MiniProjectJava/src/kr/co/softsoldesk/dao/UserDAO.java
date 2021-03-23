@@ -19,4 +19,10 @@ public class UserDAO {
 	public void addUserInfo(UserBean JoinUserBean) {
 		userMapper.addUserInfo(JoinUserBean);
 	}
+	
+	public UserBean getLoginUserInfo(UserBean tempLoginUserBean) {
+		return userMapper.getLoginUserInfo(tempLoginUserBean);
+		
+	}
+	
 }

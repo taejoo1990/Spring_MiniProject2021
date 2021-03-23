@@ -5,6 +5,10 @@ import javax.validation.constraints.Size;
 
 public class UserBean {
 
+	
+	
+	private boolean userIdExist;
+	
 	private int user_idx;
 	@Size(min=2, max=4)
 	@Pattern(regexp = "[°¡-ÆR]*")
@@ -21,6 +25,14 @@ public class UserBean {
 	@Size(min=2, max=20)
 	@Pattern(regexp = "[a-zA-Z0-9]*")
 	private String user_pw2;
+	
+	private boolean user_login;
+	
+	
+public UserBean() {
+	this.userIdExist=false;
+	this.user_login=false;
+	}
 	
 	public int getUser_idx() {
 		return user_idx;
@@ -51,6 +63,20 @@ public class UserBean {
 	}
 	public void setUser_pw2(String user_pw2) {
 		this.user_pw2 = user_pw2;
+	}
+	public boolean isUserIdExist() {
+		return userIdExist;
+	}
+	public void setUserIdExist(boolean userIdExist) {
+		this.userIdExist = userIdExist;
+	}
+
+	public boolean isUser_login() {
+		return user_login;
+	}
+
+	public void setUser_login(boolean user_login) {
+		this.user_login = user_login;
 	}
 	
 	

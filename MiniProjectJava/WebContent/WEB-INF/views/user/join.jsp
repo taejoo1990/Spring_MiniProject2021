@@ -53,6 +53,25 @@
 		$("#userIdExist").val('false')
 	}
 </script>
+<script type="text/javascript">
+$('.phone').keydown(function(event) {
+    var key = event.charCode || event.keyCode || 0;
+    $text = $(this);
+    if (key !== 8 && key !== 9) {
+        if ($text.val().length === 3) {
+            $text.val($text.val() + '-');
+        }
+        if ($text.val().length === 8) {
+            $text.val($text.val() + '-');
+        }
+    }
+ 
+    return (key == 8 || key == 9 || key == 46 || (key >= 48 && key <= 57) || (key >= 96 && key <= 105));          
+});
+
+
+</script>
+
 <body>
 
 	<c:import url="/WEB-INF/views/include/top_menu.jsp" />
@@ -66,7 +85,7 @@
 						<form:form action="${root }user/join_pro" method='post'
 							modelAttribute="JoinUserBean" acceptCharset="UTF-8">
 							<!-- 유효성 검사여부 보내기 -->
-							<form:hidden path="userIdExist"/>
+							<form:hidden path="userIdExist" />
 							<div class="form-group">
 								<form:label path="user_name">이름</form:label>
 								<form:input path="user_name" class='form-control' />
@@ -77,9 +96,11 @@
 								<form:label path="user_id">아이디</form:label>
 								<div class="input-group">
 									<!-- onkeypress="resetUserIdExist() :사용자가 입력을 하면 발생하는 이벤트로써 resetUserIdExist()함수 호출 -->
-									<form:input path="user_id" class='form-control' onkeypress="resetUserIdExist()"/>
+									<form:input path="user_id" class='form-control'
+										onkeypress="resetUserIdExist()" />
 									<div class="input-group-append">
-										<button type="button" class="btn btn-primary" onclick='checkUserIdExist()'>중복확인</button>
+										<button type="button" class="btn btn-primary"
+											onclick='checkUserIdExist()'>중복확인</button>
 									</div>
 								</div>
 								<form:errors path="user_id" style='color:red' />
