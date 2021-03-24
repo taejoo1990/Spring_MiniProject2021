@@ -61,7 +61,16 @@
 			<mapping path="/**"/>
 			<beans:bean class='kr.co.softsoldesk.interceptor.TopMenuInterceptor'/>
 		</interceptor>
+	
+		<interceptor>
+			<mapping path="/user/modify"/>
+			<mapping path="/user/logout"/>
+			<mapping path="/board/*"/>
+			<exclude-mapping path="/board/main"/>
+			<beans:bean class='kr.co.softsoldesk.interceptor.CheckLoginInterceptor'/>
+		</interceptor>
 	</interceptors>
+
 	
 	<!-- MessageSource를 등록한다 -->
 	<beans:bean class='org.springframework.context.support.ReloadableResourceBundleMessageSource' id='messageSource'>

@@ -17,6 +17,8 @@ public class UserService {
 	@Resource(name="LoginBean")
 	private UserBean loginUserBean;
 	
+	
+	//-------------------------------------------------------
 	public boolean checkUserIDExist(String user_id) {
 	String user_name = userDAO.checkUserIDExist(user_id);
 	
@@ -25,10 +27,15 @@ public class UserService {
 	}
 	return false; //사용불가능
 }
+	
+	
+	//------------------------------------------------------
 	public void addUserInfo(UserBean JoinUserBean) {
 		userDAO.addUserInfo(JoinUserBean);
 	}
+
 	
+	//--------------------------------------------------------------------
 	public void getLoginUserInfo(UserBean tempLoginUserBean) {
 		UserBean tempLoginUserBean2=userDAO.getLoginUserInfo(tempLoginUserBean);
 		

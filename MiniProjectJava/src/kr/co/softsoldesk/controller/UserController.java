@@ -60,6 +60,12 @@ public class UserController {
 		return fail;
 	}
 	
+	@GetMapping("/not_login")
+	public String notLogin() {
+	String viewName="user/not_login";
+	return viewName;
+	}
+	
 	@GetMapping("/join" )
 	public String join(@ModelAttribute("JoinUserBean") UserBean joinUserbean) {
 		return "user/join";
@@ -87,6 +93,8 @@ public class UserController {
 	
 	@GetMapping("/logout")
 	public String logout() {
+		
+		loginUserBean.setUser_login(false);
 		return "user/logout";
 	}
 	

@@ -85,6 +85,7 @@ $('.phone').keydown(function(event) {
 						<form:form action="${root }user/join_pro" method='post'
 							modelAttribute="JoinUserBean" acceptCharset="UTF-8">
 							<!-- 유효성 검사여부 보내기 -->
+							
 							<form:hidden path="userIdExist" />
 							<div class="form-group">
 								<form:label path="user_name">이름</form:label>
@@ -103,7 +104,7 @@ $('.phone').keydown(function(event) {
 											onclick='checkUserIdExist()'>중복확인</button>
 									</div>
 								</div>
-								<form:errors path="user_id" style='color:red' />
+								<form:errors path="user_id" style='red' />
 							</div>
 
 							<div class="form-group">

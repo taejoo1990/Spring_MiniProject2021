@@ -20,6 +20,8 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import kr.co.softsoldesk.beans.UserBean;
+import kr.co.softsoldesk.interceptor.CheckLoginInterceptor;
 import kr.co.softsoldesk.interceptor.TopMenuInterceptor;
 import kr.co.softsoldesk.mapper.BoardMapper;
 import kr.co.softsoldesk.mapper.TopMenuMapper;
@@ -47,7 +49,8 @@ public class ServletAppContext implements WebMvcConfigurer{
 	
 	@Autowired
 	private TopMenuService topMenuService;
-	
+	@Autowired
+	private UserBean loginUserBean;
 
 	@Override
 	public void configureViewResolvers(ViewResolverRegistry registry) {
@@ -123,10 +126,16 @@ public class ServletAppContext implements WebMvcConfigurer{
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		WebMvcConfigurer.super.addInterceptors(registry);
-		TopMenuInterceptor topMenuintercepter = new TopMenuInterceptor(topMenuService);
+		TopMenuInterceptor topMenuintercepter = new TopMenuInterceptor(topMenuService, loginUserBean );
+		CheckLoginInterceptor checkLoginInterceptor = new CheckLoginInterceptor(loginUserBean);
 		
 		InterceptorRegistration reg1= registry.addInterceptor(topMenuintercepter);
 		reg1.addPathPatterns("/**");
+		
+		
+		InterceptorRegistration reg2= registry.addInterceptor(checkLoginInterceptor);
+		reg2.addPathPatterns("/user/modify", "/user/logout", "/board/*");
+		reg2.excludePathPatterns("/board/main");
 	}
 
 
