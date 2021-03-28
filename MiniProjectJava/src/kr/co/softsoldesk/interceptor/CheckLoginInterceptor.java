@@ -3,37 +3,51 @@ package kr.co.softsoldesk.interceptor;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerInterceptor;
-import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.softsoldesk.beans.UserBean;
 
 public class CheckLoginInterceptor implements HandlerInterceptor {
 
-	//로그인여부 판단 autowired가 불가하므로 생성자를 홣용
+	
+	// 로그인 여부를 판단해야 하므로 loginUserBean객체 주입
 	private UserBean loginUserBean;
 	
-	public CheckLoginInterceptor(UserBean LoginUserBean) {
-		this.loginUserBean=LoginUserBean;
+	//AutoWire가 안되므로 생성자를 활용한다 .. 인터셉터는 오토와이어가 안됨
+	public CheckLoginInterceptor(UserBean loginUserBean) {
+		this.loginUserBean = loginUserBean;
 	}
+	
+	
+	
 	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		//로그인이 되어 있지 않으면
-		if(loginUserBean.isUser_login()==false) {
-			//로긴이 되어있지 않은 상태이므로, 로그인전 경로를 받음
-			String contextPath=request.getContextPath();
-			//로그인 처리가 안 되어 있으므로, 로그인화면으로 리다이렉트
-			response.sendRedirect(contextPath + "/user/not_login");
-			//다음단계로 이동하지 않음
-			return false; //로그인 전
+		
+		// 로그인이 되어 있지 않으면
+		if(loginUserBean.isUserlogin() == false) {
+			// 로그인이 되어 있지 않은 상태이므로 로그인 전 경로를 받음
+			String contextPath = request.getContextPath();
+			
+			// 로그인처리가 안되어 있으므로 not_login으로 페이지 전환
+			response.sendRedirect(contextPath + "/user/not_login"); // 로그인 안되면 일로 가
+			
+			// 다음단계로 이동하지 않음
+			return false; // 로그인 전
+			
 		}
-		return true; //로그인 후
+		
+		return true; // 로그인 후
 	}
-
-
 	
 	
+	
+	
+	
+	
+	
+	
+	
+
 }

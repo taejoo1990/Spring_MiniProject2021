@@ -1,7 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:set var='root' value="${pageContext.request.contextPath }/"/>
+<c:set var="root" value="${pageContext.request.contextPath }/"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,9 +14,10 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 </head>
 <body>
+<!-- board/main -->
+
 
 <c:import url="/WEB-INF/views/include/top_menu.jsp"/>
-
 <!-- 게시글 리스트 -->
 <div class="container" style="margin-top:100px">
 	<div class="card shadow">
@@ -37,70 +37,70 @@
 						<td class="text-center d-none d-md-table-cell">10</td>
 						<td><a href='${root }board/read'>글 제목 입니다</a></td>
 						<td class="text-center d-none d-md-table-cell">홍길동</td>
-						<td class="text-center d-none d-md-table-cell">2021-04-09</td>
+						<td class="text-center d-none d-md-table-cell">2018-12-12</td>
 						
 					</tr>
 					<tr>
 						<td class="text-center d-none d-md-table-cell">10</td>
-						<td><a href='board_read.html'>글 제목 입니다</a></td>
+						<td><a href='${root }board/read'>글 제목 입니다</a></td>
 						<td class="text-center d-none d-md-table-cell">홍길동</td>
-						<td class="text-center d-none d-md-table-cell">2021-04-09</td>
+						<td class="text-center d-none d-md-table-cell">2018-12-12</td>
 						
 					</tr>
 					<tr>
 						<td class="text-center d-none d-md-table-cell">10</td>
-						<td><a href='board_read.html'>글 제목 입니다</a></td>
+						<td><a href='${root }board/read'>글 제목 입니다</a></td>
 						<td class="text-center d-none d-md-table-cell">홍길동</td>
-						<td class="text-center d-none d-md-table-cell">2021-04-09</td>
+						<td class="text-center d-none d-md-table-cell">2018-12-12</td>
 						
 					</tr>
 					<tr>
 						<td class="text-center d-none d-md-table-cell">10</td>
-						<td><a href='board_read.html'>글 제목 입니다</a></td>
+						<td><a href='${root }board/read'>글 제목 입니다</a></td>
 						<td class="text-center d-none d-md-table-cell">홍길동</td>
-						<td class="text-center d-none d-md-table-cell">2021-04-09</td>
+						<td class="text-center d-none d-md-table-cell">2018-12-12</td>
 						
 					</tr>
 					<tr>
 						<td class="text-center d-none d-md-table-cell">10</td>
-						<td><a href='board_read.html'>글 제목 입니다</a></td>
+						<td><a href='${root }board/read'>글 제목 입니다</a></td>
 						<td class="text-center d-none d-md-table-cell">홍길동</td>
-						<td class="text-center d-none d-md-table-cell">2021-04-09</td>
+						<td class="text-center d-none d-md-table-cell">2018-12-12</td>
 						
 					</tr>
 					<tr>
 						<td class="text-center d-none d-md-table-cell">10</td>
-						<td><a href='board_read.html'>글 제목 입니다</a></td>
+						<td><a href='${root }board/read'>글 제목 입니다</a></td>
 						<td class="text-center d-none d-md-table-cell">홍길동</td>
-						<td class="text-center d-none d-md-table-cell">2021-04-09</td>
+						<td class="text-center d-none d-md-table-cell">2018-12-12</td>
 						
 					</tr>
 					<tr>
 						<td class="text-center d-none d-md-table-cell">10</td>
-						<td><a href='board_read.html'>글 제목 입니다</a></td>
+						<td><a href='${root }board/read'>글 제목 입니다</a></td>
 						<td class="text-center d-none d-md-table-cell">홍길동</td>
-						<td class="text-center d-none d-md-table-cell">2021-04-09</td>
+						<td class="text-center d-none d-md-table-cell">2018-12-12</td>
 						
 					</tr>
 					<tr>
 						<td class="text-center d-none d-md-table-cell">10</td>
-						<td><a href='board_read.html'>글 제목 입니다</a></td>
+						<td><a href='${root }board/read'>글 제목 입니다</a></td>
 						<td class="text-center d-none d-md-table-cell">홍길동</td>
-						<td class="text-center d-none d-md-table-cell">2021-04-09</td>
+						<td class="text-center d-none d-md-table-cell">2018-12-12</td>
 						
 					</tr>
 					<tr>
 						<td class="text-center d-none d-md-table-cell">10</td>
-						<td><a href='board_read.html'>글 제목 입니다</a></td>
+						<td><a href='${root }board/read'>글 제목 입니다</a></td>
 						<td class="text-center d-none d-md-table-cell">홍길동</td>
-						<td class="text-center d-none d-md-table-cell">2021-04-09</td>
+						<td class="text-center d-none d-md-table-cell">2018-12-12</td>
 						
 					</tr>
 					<tr>
 						<td class="text-center d-none d-md-table-cell">10</td>
-						<td><a href='board_read.html'>글 제목 입니다</a></td>
+						<td><a href='${root }board/read'>글 제목 입니다</a></td>
 						<td class="text-center d-none d-md-table-cell">홍길동</td>
-						<td class="text-center d-none d-md-table-cell">2021-04-09</td>
+						<td class="text-center d-none d-md-table-cell">2018-12-12</td>
 						
 					</tr>
 				</tbody>
@@ -159,7 +159,7 @@
 			</div>
 			
 			<div class="text-right">
-				<a href="${root }board/write" class="btn btn-primary">글쓰기</a>
+				<a href="${root }board/write?board_info_idx=${board_info_idx}" class="btn btn-primary">글쓰기</a>
 			</div>
 			
 		</div>
@@ -176,11 +176,3 @@
 
 
 
-
-
-
-
-
-
-
-    

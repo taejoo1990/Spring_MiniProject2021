@@ -3,7 +3,6 @@
 <c:set var="root" value="${pageContext.request.contextPath }/"/>
 
 <script>
-alert('로그인 해주세요')
-location.href='${root}user/login';
+	alert('수정 성공!')
+	location.href="${root}/user/modify"
 </script>
-

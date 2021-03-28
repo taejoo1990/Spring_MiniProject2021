@@ -6,16 +6,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.co.softsoldesk.beans.BoardInfoBean;
-import kr.co.softsoldesk.dao.TopMenuDao;
+import kr.co.softsoldesk.dao.TopMenuDAO;
 
 @Service
 public class TopMenuService {
 
 	@Autowired
-	private TopMenuDao TopMenuDao;
+	private TopMenuDAO topMenuDAO;
 	
 	public List<BoardInfoBean> getTopMenuList(){
-		List<BoardInfoBean> getTopMenuList = TopMenuDao.getTopMenuList();
-		return getTopMenuList;
+		List<BoardInfoBean> topMenuList = topMenuDAO.getTopMenuList();
+		return topMenuList;
 	}
+	
 }

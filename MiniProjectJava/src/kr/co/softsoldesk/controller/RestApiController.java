@@ -9,17 +9,23 @@ import kr.co.softsoldesk.service.UserService;
 
 @RestController
 public class RestApiController {
-
+	
+	
 	@Autowired
 	private UserService userService;
-		
+	
 	@GetMapping("/user/checkUserIdExist/{user_id}")
 	public String checkUserIdExist(@PathVariable String user_id) {
 		
-		boolean chk=userService.checkUserIDExist(user_id);
+		boolean chk=userService.checkUserIdExist(user_id);
 		
 		return chk+"";
-	
+		
 	}
 	
+	
+	
+	
+	
+
 }

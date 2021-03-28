@@ -2,18 +2,16 @@ package kr.co.softsoldesk.mapper;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
 import kr.co.softsoldesk.beans.BoardInfoBean;
 
-@Mapper
 public interface TopMenuMapper {
-
-
+	
 	@Select("select board_info_idx, board_info_name "
 			+ "from board_info_table "
-			+ "order by board_info_idx")
+			+ "order by board_info_idx") // name ÇÑ Ä­ ¶ç°í table ÇÑ Ä­ ¶ç¿ìÀÚ
 	List<BoardInfoBean> getTopMenuList();
+
 
 }
