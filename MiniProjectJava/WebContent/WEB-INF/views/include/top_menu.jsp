@@ -5,6 +5,7 @@
 <!-- ${pageContext.request.contextPath } : SevletAppContext.java를 통해서
 	WebContent로 들어감 -->
 <c:set var="root" value="${pageContext.request.contextPath }/"/>
+
 <!-- 상단 메뉴 부분 -->
 <nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-top shadow-lg">
 	<a class="navbar-brand" href="${root }main">SoftSoldesk</a>

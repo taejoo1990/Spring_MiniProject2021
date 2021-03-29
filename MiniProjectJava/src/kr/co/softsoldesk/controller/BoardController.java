@@ -1,5 +1,7 @@
 package kr.co.softsoldesk.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +29,12 @@ public class BoardController {
 		
 		model.addAttribute("board_info_idx", board_info_idx);
 		
+		String boardInfoName = boardService.getBoardInfoName(board_info_idx);
+		model.addAttribute("boardInfoName", boardInfoName);
+		
+		List<ContentBean> contentList = boardService.getContentList(board_info_idx);
+		model.addAttribute("contentList", contentList);
+		
 		return "board/main";
 	}
 	
@@ -37,8 +45,10 @@ public class BoardController {
 	}
 	
 	@GetMapping("/write")
-	public String write(@ModelAttribute("writeContentBean") ContentBean writeContentBean) {
+	public String write(@ModelAttribute("writeContentBean") ContentBean writeContentBean,
+						@RequestParam("board_info_idx") int board_info_idx, Model model) {
 		
+		writeContentBean.setContent_board_idx(board_info_idx);
 		return "board/write";
 	}
 	

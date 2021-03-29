@@ -54,8 +54,6 @@ public class UserService {
 		modifyUserInfo.setUser_name(tempModifyUserBean.getUser_name());
 		modifyUserInfo.setUser_id(tempModifyUserBean.getUser_id());        
 		// modifyUserInfo >> modify.jsp에 연결
-		
-		
 	}
 	
 	// 정보수정 페이지 정보수정 
