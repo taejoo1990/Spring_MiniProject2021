@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<beans xmlns="http://www.springframework.org/schema/beans"
-	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	   xsi:schemaLocation="http://www.springframework.org/schema/beans
-	   				http://www.springframework.org/schema/beans/spring-beans.xsd">
-
-	<bean id="LoginUserBean" class="kr.co.softsoldesk.beans.UserBean" scope="session"/>
-
-
+<!-- 일반 자바가(=Bean) 등록될곳. 뷰와 관련되지 않은쪽에 대한 설정. 비즈니스 로직.-->
+<beans xmlns="http://www.springframework.org/schema/beans" 
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans.xsd">
+   
+ 
+ 
+   
+ <bean id='loginUserBean' class='kr.co.softsoldesk.beans.UserBean' scope='session'/>
+ 
+   
+   
+   
 </beans>

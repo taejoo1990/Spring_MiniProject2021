@@ -1,9 +1,11 @@
 package kr.co.softsoldesk.beans;
 
 public class BoardInfoBean {
-	
+
 	private int board_info_idx;
 	private String board_info_name;
+	
+	
 	
 	public int getBoard_info_idx() {
 		return board_info_idx;
@@ -19,5 +21,5 @@ public class BoardInfoBean {
 	}
 	
 	
-
+	
 }

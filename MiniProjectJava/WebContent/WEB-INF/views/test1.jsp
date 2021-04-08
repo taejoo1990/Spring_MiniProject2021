@@ -7,7 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1> ${JoinUserBean.user_id }님회원가입완료</h1>
+<h2>test1입니다</h2>
+
+<h3>str : ${str }</h3>
+
 
 </body>
 </html>

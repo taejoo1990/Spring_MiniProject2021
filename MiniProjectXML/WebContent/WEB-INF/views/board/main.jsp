@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:set var="root" value="${pageContext.request.contextPath }/"/>
+
+
+<c:set var="root" value="${pageContext.request.contextPath }/" />
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,15 +17,15 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 </head>
 <body>
-<!-- board/main -->
 
-
+<!-- 상단 메뉴 부분 . 절대경로로 파일이 그대로 들어온다-->
 <c:import url="/WEB-INF/views/include/top_menu.jsp"/>
+
 <!-- 게시글 리스트 -->
 <div class="container" style="margin-top:100px">
 	<div class="card shadow">
 		<div class="card-body">
-			<h4 class="card-title">게시판 이름</h4>
+			<h4 class="card-title">${boardInfoName}</h4>
 			<table class="table table-hover" id='board_list'>
 				<thead>
 					<tr>
@@ -32,77 +35,19 @@
 						<th class="text-center d-none d-md-table-cell">작성날짜</th>
 					</tr>
 				</thead>
+				<!-- 상세글 읽기는 board의 read -->
+				
+				<c:forEach var='obj' items='${contentList}'>
 				<tbody>
+					
 					<tr>
-						<td class="text-center d-none d-md-table-cell">10</td>
-						<td><a href='${root }board/read'>글 제목 입니다</a></td>
-						<td class="text-center d-none d-md-table-cell">홍길동</td>
-						<td class="text-center d-none d-md-table-cell">2018-12-12</td>
+						<td class="text-center d-none d-md-table-cell">${obj.content_idx}</td>
+						<td><a href='${root }board/read'>${obj.content_subject }</a></td>
+						<td class="text-center d-none d-md-table-cell">${obj.content_write_name }</td>
+						<td class="text-center d-none d-md-table-cell">${obj.content_date }</td>
 						
 					</tr>
-					<tr>
-						<td class="text-center d-none d-md-table-cell">10</td>
-						<td><a href='${root }board/read'>글 제목 입니다</a></td>
-						<td class="text-center d-none d-md-table-cell">홍길동</td>
-						<td class="text-center d-none d-md-table-cell">2018-12-12</td>
-						
-					</tr>
-					<tr>
-						<td class="text-center d-none d-md-table-cell">10</td>
-						<td><a href='${root }board/read'>글 제목 입니다</a></td>
-						<td class="text-center d-none d-md-table-cell">홍길동</td>
-						<td class="text-center d-none d-md-table-cell">2018-12-12</td>
-						
-					</tr>
-					<tr>
-						<td class="text-center d-none d-md-table-cell">10</td>
-						<td><a href='${root }board/read'>글 제목 입니다</a></td>
-						<td class="text-center d-none d-md-table-cell">홍길동</td>
-						<td class="text-center d-none d-md-table-cell">2018-12-12</td>
-						
-					</tr>
-					<tr>
-						<td class="text-center d-none d-md-table-cell">10</td>
-						<td><a href='${root }board/read'>글 제목 입니다</a></td>
-						<td class="text-center d-none d-md-table-cell">홍길동</td>
-						<td class="text-center d-none d-md-table-cell">2018-12-12</td>
-						
-					</tr>
-					<tr>
-						<td class="text-center d-none d-md-table-cell">10</td>
-						<td><a href='${root }board/read'>글 제목 입니다</a></td>
-						<td class="text-center d-none d-md-table-cell">홍길동</td>
-						<td class="text-center d-none d-md-table-cell">2018-12-12</td>
-						
-					</tr>
-					<tr>
-						<td class="text-center d-none d-md-table-cell">10</td>
-						<td><a href='${root }board/read'>글 제목 입니다</a></td>
-						<td class="text-center d-none d-md-table-cell">홍길동</td>
-						<td class="text-center d-none d-md-table-cell">2018-12-12</td>
-						
-					</tr>
-					<tr>
-						<td class="text-center d-none d-md-table-cell">10</td>
-						<td><a href='${root }board/read'>글 제목 입니다</a></td>
-						<td class="text-center d-none d-md-table-cell">홍길동</td>
-						<td class="text-center d-none d-md-table-cell">2018-12-12</td>
-						
-					</tr>
-					<tr>
-						<td class="text-center d-none d-md-table-cell">10</td>
-						<td><a href='${root }board/read'>글 제목 입니다</a></td>
-						<td class="text-center d-none d-md-table-cell">홍길동</td>
-						<td class="text-center d-none d-md-table-cell">2018-12-12</td>
-						
-					</tr>
-					<tr>
-						<td class="text-center d-none d-md-table-cell">10</td>
-						<td><a href='${root }board/read'>글 제목 입니다</a></td>
-						<td class="text-center d-none d-md-table-cell">홍길동</td>
-						<td class="text-center d-none d-md-table-cell">2018-12-12</td>
-						
-					</tr>
+					</c:forEach>
 				</tbody>
 			</table>
 			
@@ -159,12 +104,15 @@
 			</div>
 			
 			<div class="text-right">
-				<a href="${root }board/write" class="btn btn-primary">글쓰기</a>
+			<!-- 글쓰기 누르면, 어느 게시판의 글쓰기인지지 보드인덱스를 붙여서 간다. -->
+				<a href="${root }board/write?board_info_idx=${board_info_idx}" class="btn btn-primary">글쓰기</a>
 			</div>
 			
 		</div>
 	</div>
 </div>
+
+<!-- 하단 메뉴 -->
 
 <c:import url="/WEB-INF/views/include/bottom_info.jsp"/>
 

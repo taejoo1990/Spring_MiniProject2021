@@ -15,7 +15,9 @@ public class TopMenuService {
 	private TopMenuDAO topMenuDAO;
 	
 	public List<BoardInfoBean> getTopMenuList(){
-		List<BoardInfoBean> topMenuList = topMenuDAO.getTopMenuList();
+		
+		List<BoardInfoBean> topMenuList=topMenuDAO.getTopMenuList();
+		
 		return topMenuList;
 	}
 	

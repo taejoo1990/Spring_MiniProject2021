@@ -12,18 +12,21 @@ import kr.co.softsoldesk.beans.UserBean;
 @Controller
 public class HomeController {
 	
-	//@Resource(name="loginUserBean")
-	//private UserBean loginUserBean; // 객체 생성
+	//이름+오토와이어드
+	@Resource(name="loginUserBean")
+	private UserBean loginUserBean;
 	
 	
 	
-	//클라이언트가 어디서든 주소를 요청하면  String Home()을 호출함
-	@RequestMapping(value="/", method=RequestMethod.GET)
+	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String Home(HttpServletRequest request) {
-		//System.out.println(loginUserBean);
+		
+		//파일객체는 실제 경로로 지정해야 하기 때문에 application객체를 뽑아서 realPath로 디렉토리를 찾아내야한다. (BoardService에서 path처리할것).
+
 		System.out.println(request.getServletContext().getRealPath("/"));
 		
 		return "redirect:/main";
 	}
-
+	
+	
 }

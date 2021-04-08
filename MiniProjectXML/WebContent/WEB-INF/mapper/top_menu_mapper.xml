@@ -1,14 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
+
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
 <mapper namespace="topmenu">
-	<select id="get_topmenu_list"
-		resultType="kr.co.softsoldesk.beans.BoardInfoBean">
+<!-- resultType : 메서드의 자료형이 BoardInfoBean, 메서드이름이 get_topmenu_list -->
+<select id="get_topmenu_list" resultType="kr.co.softsoldesk.beans.BoardInfoBean">
 
            <![CDATA[
 			select board_info_idx, board_info_name 
 			from board_info_table 
 			order by board_info_idx
 			]]>
-	</select>
+
+</select>
 </mapper>
+
+<!-- 쿼리를 작성할 때, '<', '>', '&'를 사용해야하는 경우가 생기는데
+ xml에서 그냥 사용할 경우 태그로 인식하는 경우가 종종있다. 
+ 이럴경우 에러를 뱉어내기 때문에 '태그가 아니라 실제 쿼리에 필요한 코드'라고 알려줘야 한다.
+  그때 사용하는 것이 <!CDATA[...]]> 이다.
+한 마디로 XML parser에 의해 해석하지말고 그대로 브라우저에 출력하라는 뜻이다.
+
+-->

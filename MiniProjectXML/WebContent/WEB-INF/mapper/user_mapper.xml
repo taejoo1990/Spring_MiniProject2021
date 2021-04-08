@@ -1,22 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
+
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
 <mapper namespace="user">
-	<select id="checkUserIdExist" parameterType="java.lang.String"
-		resultType="java.lang.String">
-		select user_name
-		from user_table
-		where user_id= #{user_id}
-	</select>
+<!-- resultType : 메서드의 자료형이 스트링이지만 전체패키지 다쓴다, 메서드이름이 checkUserIdExist, 매개변수(parameterType)도 스트링타입 -->
+<!-- mapper 네임스페이스에서 select를 제공함 -->
+<!-- DAO의 메서드이름이 checkUserIdExist가 되는것. -->
 
+<select id="checkUserIdExist"  parameterType="java.lang.String" resultType="java.lang.String" >
 
-	<insert id="addUserInfo"
-		parameterType="kr.co.softsoldesk.beans.UserBean">
+           
+			select user_name 
+			from user_table 
+			where user_id=#{user_id}
+			
 
-		<![CDATA[
+</select>
+
+<insert parameterType="kr.co.softsoldesk.beans.UserBean" id="addUserInfo">
+
+<![CDATA[
 			insert into user_table (user_idx, user_name, user_id, user_pw)
 			values (user_seq.nextval, #{user_name}, #{user_id}, #{user_pw})
 		]]>
-	</insert>
+</insert>
+
+<select id="getLoginUserInfo" parameterType="kr.co.softsoldesk.beans.UserBean" resultType="kr.co.softsoldesk.beans.UserBean">
+		<![CDATA[
+			select user_idx, user_name
+			from user_table 
+			where user_id=#{user_id} and user_pw=#{user_pw}
+		]]>
+	</select>
+
+<select id="getModifyUserInfo" parameterType="java.lang.Integer" resultType="kr.co.softcampus.beans.UserBean">
+		<![CDATA[
+			select user_id, user_name
+			from user_table
+			where user_idx = #{user_idx}
+		]]>
+	</select>
+
+
+
+
 
 </mapper>

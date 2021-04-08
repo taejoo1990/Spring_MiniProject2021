@@ -1,57 +1,98 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <web-app version="4.0"
 	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
-                       http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd">
+                         http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd">  <!-- (17) -->
+<!-- 설정을 위한 설정. 즉, xml 파일을 인식하도록 각 파일을 가리켜준다. -->
+<!-- 현재 웹 애플리케이션에서 받아들이는 모든 요청에 대해(/), appServlet이라는 이름으로 정의되어 있는 Servlet을 사용하겠다고 설정하기.(430) -->
+ <servlet-mapping>
+        <servlet-name>appServlet</servlet-name>
+        <url-pattern>/</url-pattern> <!-- 프론트컨트롤러는 모든 요청을 처리해야하므로 /라고 지정 -->
+    </servlet-mapping>
 
-	<!-- 현재 웹어플리케이션에서 받아들이는 모든 요청에 대해 appServlet이라는 이름으로 정의 되어 있는 servlet을 사용하겠다는 
-		설정 -->
-	<servlet-mapping>
-		<servlet-name>appServlet</servlet-name>
-		<url-pattern>/</url-pattern>
-	</servlet-mapping>
 
-	<!-- 요청 정보를 분석해서 컨트롤러를 선태하는 서블릿을 지칭한다 -->
-	<servlet>
-		<servlet-name>appServlet</servlet-name>
-		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-		<!-- Spring MVC를 설정하는 xml -->
-		<init-param>
-			<param-name>contextConfigLocation</param-name>
-			<param-value>/WEB-INF/config/servlet-context.xml</param-value>
-		</init-param>
-		<load-on-startup>1</load-on-startup>
-	</servlet>
-	<!-- Bean을 정의할 xml 파일을 지원한다 -->
-	<context-param>
-		<param-name>contextConfigLocation</param-name>
-		<param-value>/WEB-INF/config/root-context.xml</param-value>
-	</context-param>
 
-	<!-- 리스너 설정 : 클라이언트 요청시 servlet-context와 root-context를 로딩함 -->
-	<listener>
-		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-	</listener>
+<!-- 요청 정보를 "분석해서" 컨트롤러를 선택하는 역할을 하는 놈을, appServlet이라는 이름의 디스파쳐서블렛으로 지정한다. -->
+<servlet>
+<servlet-name>appServlet</servlet-name>
+<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 
-	<!-- 파라미터 인코딩 필터설정 -->
-	<filter>
-		<filter-name>encodingFilter</filter-name>
-		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
-		<init-param>
-			<param-name>encoding</param-name>
-			<param-value>UTF-8</param-value>
-		</init-param>
-		<init-param>
-			<param-name>forceEncoding</param-name>
-			<param-value>true</param-value>
-		</init-param>
-	</filter>
+<!--  Spring MVC를 설정하는 xml 파일 지정 : servlet 태그 아직 안닫았음
 
-	<filter-mapping>
-		<filter-name>encodingFilter</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
+<init-param> : 서블릿 초기화 파라미터 .
+
+서블릿은 init(ServletConfig) 에서 부터 ServletConfig 를 가지게 된다
+생성자에서는 없다
+
+서블릿 클래스에 코딩하지 않고 DD 파일에 정의해두면 변경시 서블릿을 바꿀 필요도 다시 컴파일 할 필요도 없다
+
+  -->
+<init-param>
+<param-name>contextConfigLocation</param-name>
+<param-value>/WEB-INF/config/servlet-context.xml</param-value>
+</init-param>
+<load-on-startup>1</load-on-startup>
+
+<!-- 멀티파트파일을 읽기위한 설정 -->
+     <multipart-config>
+        	<max-file-size>52428800</max-file-size>
+        	<max-request-size>524288000</max-request-size>
+        	<file-size-threshold>0</file-size-threshold>
+        </multipart-config>
+
+
+</servlet>
+
+<!-- 일반 Bean을 정의할 xml 파일을  지정  
+
+<context-param> : 컨텍스트 초기화 파라미터.
+
+모든 웹 애플리케이션에서 파라미터를 공유하기 위해서 사용한다
+
+-->
+<context-param>
+<param-name>contextConfigLocation</param-name>
+<param-value>/WEB-INF/config/root-context.xml</param-value>
+</context-param>
+
+<!-- 리스너 설정 : 클라이언트 요청시 시작부터 servlet-context, root-context쪽의 설정정보를 모두 읽고 가게 하자.
+
+계층별로 나눈 xml 설정파일이 있다고 가정할 때,
+web.xml에서 모두 load되도록 등록할 때 사용.
+서블릿이전에 서블릿 초기화하는 용도로 쓰이며, 
+contextConfigLocation라는 파라미터를 쓰면, 
+Context Loader가 load할 수 있는 설정파일을 여러개 쓸 수 있다.
+
+web.xml에 저 문장이 빠지게 되면 default로,
+/WEB-INF/applicationContext.xml (spring 설정파일) 을 쓰게 된다.
+
+
+ -->
+<listener>
+<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+</listener>
+
+<!-- 파라미터 인코딩 필터 설정 -->
+
+<filter>
+	<filter-name>encodingFilter</filter-name>
+    <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+    <init-param>
+    	<param-name>encoding</param-name>
+        <param-value>UTF-8</param-value>
+    </init-param>
+     <init-param>
+    	<param-name>forceEncoding</param-name>
+        <param-value>true</param-value>
+    </init-param>
+</filter>
+
+<filter-mapping>
+	<filter-name>encodingFilter</filter-name>
+    <url-pattern>/*</url-pattern> <!-- 모든경로는 * 1개, 바로 아래는 * 2개 -->
+</filter-mapping>
 
 
 
